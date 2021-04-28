@@ -1,0 +1,52 @@
+using UnityEngine;
+using UnityEngine.Events;
+
+public class Interactable : MonoBehaviour
+{
+    public bool isInRange;
+    public KeyCode interactKey;
+    public UnityEvent interactAction;   
+    
+    //Metoda se zavolá po při startu programu, není nyní potřeba
+    void Start()
+    {
+        
+    }
+
+    //Metoda se zavolá při každém snímku
+    void Update()
+    {
+        //Pokud je hrac v dosahu interakce
+        if(isInRange) 
+        {
+            //Po zmacknuti klavesi pro interakci
+            if(Input.GetKeyDown(interactKey)) 
+            {
+                //Spusti event
+                interactAction.Invoke(); 
+            }
+        }
+    }
+    
+    //Metoda se zavolá při kolizi, využívá informace o kolize z "Collider2D"
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //Pokud se štítek objektu rovná hodnotě "Player"
+        if(collision.transform.tag == "Player")
+        {
+            //Nastaví hodnotu pro dosah na pravda
+            isInRange = true;
+        }
+    }
+    
+    //Metoda se zavolá při ukončení kolize, využívá informace o kolize z "Collider2D"
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        //Pokud se štítek objektu rovná hodnotě "Player"
+        if(collision.transform.tag == "Player")
+        {
+            //Nastaví hodnotu pro dosah na nepravda
+            isInRange = false;
+        }
+    }
+}
