@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class InteractGate : MonoBehaviour
 {
+    //Animator aktualniho objektu
     private Animator animator;
 
+    //Získá animator z komponentu Animator
     private void Awake (){
         animator = GetComponent<Animator>();
     }
     
+    //Metoda pro otevření brány
     public void OpenGate(){
+    
+        //Nastaví proměnnou zámek na nepravda
         animator.SetBool("Lock", false);
     }
-
+    
+    //Metoda pro zavření brány
     public void CloseGate() {
+    
+        //Nastaví proměnnou zámek na pravda
         animator.SetBool("Lock", true);
     }
 }
