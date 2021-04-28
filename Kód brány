@@ -1,0 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class InteractGate : MonoBehaviour
+{
+    private Animator animator;
+
+    private void Awake (){
+        animator = GetComponent<Animator>();
+    }
+    
+    public void OpenGate(){
+        animator.SetBool("Lock", false);
+    }
+
+    public void CloseGate() {
+        animator.SetBool("Lock", true);
+    }
+}
