@@ -1,0 +1,46 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class InteractOpen : MonoBehaviour
+{
+    //Pole pro objekt brany k otevreni
+    [SerializeField] private InteractGate gate;
+    
+    //Animator aktualniho objektu
+    public Animator animator;
+
+    //Promena pro zjisteni stavu
+    public bool locked;
+
+    //Metoda pro otevirani a zavirani
+    public void OpenLock()
+    {
+        //Pokud neni zavrena
+        if(!locked)
+        {
+            //Nastavit promenou pro zavreni jako pravda je zavrena
+            locked = true;
+
+            //Nastavit promenou v animatoru na aktualni hodnotu pro zavreni
+            animator.SetBool("Lock", locked);
+
+            //Spusti prikaz na objektu brany
+            gate.OpenGate();
+        } else 
+        {
+            //Jinak pokud je zavrena
+            if(locked)
+            {
+                //Nastavit promenou pro zavreni jako nepravda je otevrena
+                locked = false;
+
+                ////Nastavit promenou v animatoru na aktualni hodnotu pro zavreni
+                animator.SetBool("Lock", locked);
+
+                //Spusti prikaz na objektu brany
+                gate.CloseGate();
+            }
+        }
+    }
+}
